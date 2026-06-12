@@ -1,160 +1,126 @@
-# KKU-COCAI 2040 🎓
+# KKU-COCAI2040
+### Strategic Roadmap — College of Computing and Artificial Intelligence, Khon Kaen University
 
-> **AI as a horizontal capability — built by the College of Computing, for every domain, every discipline.**
-
-A strategic roadmap website for the **College of Computing & Artificial Intelligence, Khon Kaen University** — presenting a 15-year vision (2026–2040) to become Southeast Asia's premier AI research and education hub.
+**Timeline:** 2026 – 2040 (15 years) · **Goal:** Top 3 AI research institution in ASEAN
 
 ---
 
-## 📋 What's Inside
+## Core Philosophy
 
-A single-file HTML website covering the full KKU-COCAI2040 strategic roadmap:
+> "AI is not a department. It is a horizontal capability that empowers every domain, every discipline, every human."
 
-| Section | Description |
+Rather than treating AI as a single siloed department, KKU-COCAI embeds AI as a shared foundational layer across teaching, research, and societal impact — touching every discipline at Khon Kaen University.
+
+This vision draws on and credits several global frameworks:
+- **Stanford HAI** – 3-Pillar Framework (Research, Education, Societal Impact)
+- **MIT CSAIL** – Research priority areas (physics-guided deep learning, liquid networks, robotics)
+- **Google DeepMind** – "AI in 2030" long-term capability projections
+- **MIT CISR** – 4-Stage AI Maturity Model (used to structure the three phases below)
+- **Georgia Tech** – AI-powered education and intelligent tutoring research
+- **NAIRR** – Open, equitable AI research infrastructure model
+
+The four founding principles are:
+1. **Research Excellence** — world-class publications, citations, and patents across AI and interdisciplinary domains
+2. **Education Transformation** — from AI literacy for all students to deep specialist programs
+3. **Social Impact** — applying AI to real regional problems in health, agriculture, disaster response, and education
+4. **Open & Inclusive** — open science, equitable access, ASEAN collaboration, and ethical AI by design
+
+---
+
+## AI as the Horizontal Layer
+
+A shared **AI Core** — covering Foundation Models, Responsible AI, Human-Centered AI, Agentic Systems, and Data Infrastructure — runs underneath all six research domains. Each domain progresses through the same three phases, but with domain-specific milestones.
+
+---
+
+## Three Strategic Phases
+
+### Phase I — Foundation (2025–2030)
+Build the infrastructure, talent, and culture for sustainable AI research and education, and establish COCAI's core identity.
+
+- Launch an AI literacy curriculum for all KKU undergraduates
+- Establish three seed research labs: GeoAI, MedAI, and Human-Centered AI
+- Hire 15+ AI-specialized faculty across domains
+- Run the first KKU–Hospital AI pilot programs
+- Build a quantum computing curriculum and simulation lab
+
+### Phase II — Expansion (2030–2035)
+Scale research centers, deepen industry and hospital partnerships, and launch flagship interdisciplinary degree programs with international reach.
+
+- Open six domain-specific research centers
+- Launch MSc and PhD programs in AI + Domain (GeoAI, MedAI, Quantum)
+- Publish and adopt an ASEAN AI Ethics Framework
+- Build 50+ active industry and government partnerships
+- Release an open-source Thai-language foundation model
+
+### Phase III — Leadership (2035–2040)
+Achieve recognition as Southeast Asia's premier AI research and education hub, with deep policy influence, global publications, and impactful spin-offs.
+
+- Reach a Top 3 AI research institution ranking in ASEAN
+- Generate 10+ deep-tech spin-offs from COCAI research
+- Grow to 500+ AI researchers and alumni in the ecosystem
+- Host an annual ASEAN AI Summit at KKU
+- Establish a nationally designated quantum computing center
+
+---
+
+## Six Research & Teaching Domains
+
+| Domain | Focus |
 |---|---|
-| **Hero** | Animated dark hero with wordmark, stats strip, and CTAs |
-| **Vision & Philosophy** | Core philosophy and 4 strategic pillars |
-| **AI as Horizontal Layer** | Domain × Phase capability matrix |
-| **Three Strategic Phases** | Foundation → Expansion → Leadership (2026–2040) |
-| **Six Research Domains** | GeoAI, Medicine, Quantum, HCAI, Education, Agentic AI |
-| **Teaching · Research · Impact** | Stanford HAI 3-Pillar strategy table |
-| **2040 Targets** | 7 measurable success metrics |
-| **References & Credits** | Stanford HAI, MIT CSAIL, Google DeepMind, MIT CISR, Georgia Tech, NAIRR |
+| 🌍 **GeoAI & Geoscience** | Geospatial analysis, remote sensing, climate modeling, smart agriculture, disaster response — leveraging KKU's location in the agricultural heart of Northeast Thailand |
+| 🩺 **AI + Medicine & Health** | Medical imaging AI, clinical decision support, drug discovery, genomics, public health — in partnership with KKU's medical faculty and hospital |
+| ⚛️ **Quantum Computing** | Quantum algorithms, quantum-classical hybrid systems, post-quantum cryptography, quantum sensing |
+| 🧑‍💻 **Human-Centered AI** | Explainable AI, fairness, ethics, governance, HCI, and culturally-aware AI for Thai and ASEAN communities |
+| 📚 **AI for Education & Society** | Intelligent tutoring, adaptive learning platforms, AI literacy, and smart city solutions for Khon Kaen |
+| 🤖 **Agentic AI & Foundation Models** | Thai/ASEAN language models, multi-agent systems, robotics, and AI safety research — the core capability powering all other domains |
 
 ---
 
-## 📱 Mobile-First Design
+## Strategic Pillars: Teaching · Research · Impact
 
-Fully responsive across **iPhone, Samsung, and all modern devices**:
+Every domain operates across all three pillars, adapted from the Stanford HAI 3-Pillar Framework:
 
-- **Hamburger drawer navigation** — smooth slide-in panel with backdrop dismiss, ESC key, and swipe-to-close
-- **Safe area insets** — `env(safe-area-inset-*)` for iPhone notch, Dynamic Island, and Samsung punch-hole cameras
-- **`100svh` hero** — avoids iOS Safari toolbar clipping on full-screen hero sections
-- **Fluid typography** — `clamp()` everywhere; text scales beautifully from 375px to 1440px+
-- **Horizontal scroll tables** — capability matrix and strategy pillars scroll smoothly with `-webkit-overflow-scrolling: touch`
-- **44px minimum tap targets** — all buttons and links meet Apple/Google accessibility guidelines
-- **Responsive grids** — 3-col → 2-col → 1-col at appropriate breakpoints
+- **Teaching** — curriculum and pedagogy that build domain-specific AI competencies
+- **Research** — frontier research producing publications, models, and IP
+- **Impact** — real-world deployment addressing regional and national challenges (e.g., agricultural intelligence for Isan, rural healthcare AI, ASEAN AI governance, smart campus initiatives)
 
-### Breakpoints
+---
 
-| Breakpoint | Layout |
+## 2040 Targets
+
+| Target | Description |
 |---|---|
-| `> 960px` | Full desktop — 3-column grids, side-by-side philosophy |
-| `680px – 960px` | Tablet — 2-column grids, stacked phases |
-| `< 680px` | Mobile — single column, hamburger nav, full-width buttons |
-| `< 400px` | Small mobile — condensed typography and single-column targets |
+| **Top 3** | AI research institution ranking in ASEAN |
+| **500+** | AI researchers, graduates, and alumni active in the ecosystem |
+| **6** | World-class domain research centers fully operational |
+| **50+** | Active industry, hospital, and government partnerships |
+| **10+** | Deep-tech spin-offs launched from COCAI research |
+| **1** | Annual ASEAN AI Summit hosted at KKU, Khon Kaen |
+| **Open** | ASEAN foundation language model released open source |
 
 ---
 
-## 🗂 File Structure
+## References & Acknowledgements
 
-```
-cocai-2040-mobile.html   # Complete website (HTML + CSS + JS, single file)
-README.md                # This file
-```
+KKU-COCAI2040 adapts frameworks and priorities from:
 
-Everything is self-contained. Fonts load from Google Fonts CDN. No frameworks, no build tools, no package.json.
-
----
-
-## 🎨 Design System
-
-### Color Palette
-
-| Token | Hex | Usage |
-|---|---|---|
-| `--navy` | `#0A1628` | Primary background, headings |
-| `--crimson` | `#8B1A2F` | Brand accent, eyebrows, CTAs |
-| `--teal` | `#0E7C6E` | Phase I / Foundation |
-| `--purple` | `#5C3D99` | Phase II / Expansion |
-| `--amber` | `#C97B1A` | Phase III / Leadership |
-| `--slate` | `#F7F8FA` | Alternate section background |
-
-### Typography
-
-| Role | Font | Weight |
-|---|---|---|
-| Wordmark / Hero | DM Sans | 200 (ultralight) |
-| Section titles | Inter | 700 |
-| Pull quotes | Playfair Display | 700 italic |
-| Body / UI | Inter | 400, 500, 600 |
-
-### Animations
-
-- **Hero grid drift** — subtle perspective movement on the dot grid background
-- **Radial glow pulses** — soft color orbs that breathe on the hero
-- **Scroll reveals** — `IntersectionObserver`-driven `fadeUp` with staggered delays
-- **Nav transition** — transparent → frosted glass on scroll (`backdrop-filter: blur(20px)`)
-- **Scroll indicator** — animated drop-line guides first-time visitors
-
-All animations respect `prefers-reduced-motion`.
+- [Stanford HAI](https://hai.stanford.edu) — 3-Pillar Framework
+- [MIT CSAIL](https://csail.mit.edu) — Research priorities
+- [Google DeepMind](https://deepmind.google) — "AI in 2030" long-term vision
+- [MIT CISR](https://cisr.mit.edu) — 4-Stage AI Maturity Model
+- [Khon Kaen University](https://kku.ac.th)
 
 ---
 
-## 🏛 Strategic Framework
-
-KKU-COCAI 2040 is organized around three interlocking ideas:
-
-### Three Phases
-
-```
-2026 ──────────── 2030 ──────────── 2035 ──────────── 2040
-   [ Foundation ]      [ Expansion ]      [ Leadership ]
-   Infra · Talent      Centers · Degrees  Top 3 ASEAN
-```
-
-### Six Research Domains
-
-1. 🌍 **GeoAI & Geoscience** — Remote sensing, climate AI, smart agriculture
-2. 🩺 **AI + Medicine & Health** — Medical imaging, drug discovery, clinical AI
-3. ⚛️ **Quantum Computing** — Quantum ML, post-quantum cryptography
-4. 🧑‍💻 **Human-Centered AI** — Ethics, explainability, ASEAN AI governance
-5. 📚 **AI for Education & Society** — Intelligent tutoring, adaptive learning, smart city
-6. 🤖 **Agentic AI & Foundation Models** — Thai/ASEAN LLMs, multi-agent systems, robotics
-
-### Three Pillars (Stanford HAI Framework)
-
-Every domain operates across **Teaching**, **Research**, and **Impact** — simultaneously and at every phase.
-
----
-
-## 📚 References & Inspiration
-
-| Institution | Framework Borrowed |
-|---|---|
-| [Stanford HAI](https://hai.stanford.edu) | 3-Pillar Framework (Research · Education · Impact) |
-| [MIT CSAIL](https://csail.mit.edu) | Research priority areas (physics-guided DL, liquid networks, robotics) |
-| [Google DeepMind](https://deepmind.google) | "AI in 2030" long-term capability projections |
-| [MIT CISR](https://cisr.mit.edu) | 4-Stage AI Maturity Model → COCAI's three phases |
-| [Georgia Tech](https://gatech.edu) | Jill Watson ITS, AI-Powered Learning framework |
-| NAIRR | Open compute & dataset infrastructure model |
-
-Frameworks were adapted — not copied — for the unique context of **Khon Kaen University** and Northeast Thailand.
-
----
-
-## 🌏 Context
-
-**Khon Kaen University (KKU)** is Thailand's leading university in the Northeast (Isan) region. The College of Computing & AI sits at the intersection of:
-
-- A world-class KKU Medical Faculty and Hospital (AI + Medicine partnership)
-- Isan's agricultural heartland (GeoAI, smart farming, flood prediction)
-- ASEAN's emerging AI governance needs (Human-Centered AI, ethics policy)
-- Thailand's national AI strategy and digital economy agenda
-
-KKU-COCAI's mission: embed AI not as a silo, but as a **horizontal capability** across every school, every faculty, every discipline at KKU — and beyond.
+**College of Computing and Artificial Intelligence (COCAI)**
+Khon Kaen University, 123 Mitraphap Road, Khon Kaen 40002, Thailand
 
 ---
 
 ## 📄 License
 
 This project is an academic strategic planning document produced by the College of Computing & Artificial Intelligence, Khon Kaen University. Referenced frameworks belong to their respective institutions (Stanford HAI, MIT, Google DeepMind, etc.).
-
----
-
-*College of Computing & Artificial Intelligence · Khon Kaen University*  
-*123 Mitraphap Road, Khon Kaen 40002, Thailand*  
-*[kku.ac.th](https://kku.ac.th)*
 
 ---
 
