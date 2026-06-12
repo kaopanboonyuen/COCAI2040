@@ -1,0 +1,1600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>COCAI 2040 — College of Computing, Khon Kaen University</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:ital,opsz,wght@0,9..40,200;0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🧠</text></svg>">
+<style>
+/* ─── RESET & BASE ─────────────────────────────── */
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; font-size: 16px; -webkit-text-size-adjust: 100%; }
+body {
+  font-family: 'Inter', system-ui, sans-serif;
+  background: #ffffff;
+  color: #0A1628;
+  line-height: 1.7;
+  overflow-x: hidden;
+}
+img { display: block; max-width: 100%; }
+a { text-decoration: none; color: inherit; }
+
+/* ─── TOKENS ───────────────────────────────────── */
+:root {
+  --navy:    #0A1628;
+  --crimson: #8B1A2F;
+  --crimson-light: #B52840;
+  --teal:    #0E7C6E;
+  --teal-light: #12A090;
+  --amber:   #C97B1A;
+  --purple:  #5C3D99;
+  --slate:   #F7F8FA;
+  --slate-2: #EEF0F4;
+  --border:  rgba(10,22,40,0.09);
+  --border-hover: rgba(10,22,40,0.18);
+  --text-muted: #5A6A7E;
+  --text-light: #8A97A8;
+  --shadow-sm: 0 1px 3px rgba(10,22,40,0.07), 0 1px 2px rgba(10,22,40,0.04);
+  --shadow-md: 0 4px 16px rgba(10,22,40,0.08), 0 2px 6px rgba(10,22,40,0.05);
+  --shadow-lg: 0 12px 40px rgba(10,22,40,0.10), 0 4px 12px rgba(10,22,40,0.06);
+  --radius-sm: 6px;
+  --radius-md: 10px;
+  --radius-lg: 16px;
+  --radius-xl: 24px;
+}
+
+/* ─── TYPOGRAPHY ───────────────────────────────── */
+.display { font-family: 'Playfair Display', Georgia, serif; }
+h1,h2,h3,h4 { line-height: 1.2; letter-spacing: -0.02em; }
+
+/* ─── NAV ──────────────────────────────────────── */
+nav {
+  position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+  background: rgba(255,255,255,0.0);
+  backdrop-filter: blur(0px);
+  border-bottom: 1px solid transparent;
+  transition: background 0.4s, backdrop-filter 0.4s, border-color 0.4s, box-shadow 0.4s;
+}
+nav.scrolled {
+  background: rgba(255,255,255,0.88);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-sm);
+}
+.nav-inner {
+  max-width: 1160px; margin: 0 auto;
+  padding: 0 40px;
+  height: 64px;
+  display: flex; align-items: center; justify-content: space-between;
+}
+.nav-logo { display: flex; align-items: center; gap: 10px; }
+.nav-logo-mark {
+  width: 28px; height: 28px;
+  background: var(--crimson);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  flex-shrink: 0;
+}
+.nav-logo-mark svg { width: 16px; height: 16px; fill: white; }
+.nav-logo-text {
+  font-size: 13px; font-weight: 600;
+  color: var(--navy); letter-spacing: 0.01em;
+}
+.nav-logo-sub { font-size: 10px; color: var(--text-muted); font-weight: 400; }
+.nav-links { display: flex; gap: 2px; }
+.nav-links a {
+  font-size: 13px; font-weight: 500;
+  color: var(--text-muted);
+  padding: 6px 12px; border-radius: var(--radius-sm);
+  transition: color 0.2s, background 0.2s;
+  white-space: nowrap;
+}
+.nav-links a:hover { color: var(--navy); background: var(--slate); }
+.nav-cta {
+  font-size: 12px; font-weight: 600;
+  background: var(--crimson);
+  border: 1px solid var(--crimson);
+  color: white;
+  padding: 8px 16px; border-radius: var(--radius-sm);
+  letter-spacing: 0.02em;
+  transition: background 0.2s, border-color 0.2s;
+  white-space: nowrap;
+}
+.nav-cta:hover { background: var(--crimson-light); border-color: var(--crimson-light); }
+
+/* Mobile menu toggle */
+.nav-toggle {
+  display: none;
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  border: 1px solid var(--border);
+  background: white;
+  align-items: center; justify-content: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+.nav-toggle svg { width: 18px; height: 18px; stroke: var(--navy); }
+.nav-toggle .icon-close { display: none; }
+.nav-toggle.open .icon-menu { display: none; }
+.nav-toggle.open .icon-close { display: block; }
+
+.nav-mobile-panel {
+  display: none;
+  position: fixed; top: 64px; left: 0; right: 0; z-index: 99;
+  background: rgba(255,255,255,0.97);
+  backdrop-filter: blur(20px);
+  border-bottom: 1px solid var(--border);
+  box-shadow: var(--shadow-md);
+  flex-direction: column;
+  padding: 8px 20px 20px;
+  gap: 2px;
+}
+.nav-mobile-panel.open { display: flex; }
+.nav-mobile-panel a {
+  font-size: 14px; font-weight: 500; color: var(--navy);
+  padding: 12px 8px; border-radius: var(--radius-sm);
+  border-bottom: 1px solid var(--border);
+}
+.nav-mobile-panel a:last-child { border-bottom: none; }
+.nav-mobile-panel a:hover { background: var(--slate); }
+
+/* ─── HERO — WHITE AI LAB ──────────────────────── */
+#hero-wrapper {
+  position: relative;
+  min-height: 100dvh;
+  background:
+    radial-gradient(ellipse 900px 600px at 85% 10%, rgba(139,26,47,0.06) 0%, transparent 60%),
+    radial-gradient(ellipse 700px 700px at 5% 90%, rgba(14,124,110,0.06) 0%, transparent 60%),
+    #ffffff;
+  overflow: hidden;
+  display: flex; flex-direction: column;
+}
+
+/* Fine technical grid */
+.hero-grid {
+  position: absolute; inset: 0;
+  background-image:
+    linear-gradient(rgba(10,22,40,0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(10,22,40,0.035) 1px, transparent 1px);
+  background-size: 64px 64px;
+  mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.15) 75%, transparent 100%);
+  -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.9) 0%, rgba(0,0,0,0.15) 75%, transparent 100%);
+}
+
+/* Hero content */
+#hero {
+  position: relative; z-index: 2;
+  flex: 1;
+  display: flex; flex-direction: column; justify-content: center;
+  max-width: 1160px; margin: 0 auto; width: 100%;
+  padding: 140px 40px 100px;
+}
+
+.hero-kicker {
+  display: inline-flex; align-items: center; gap: 8px;
+  margin-bottom: 32px;
+  opacity: 0; animation: fadeUp 0.8s ease 0.2s forwards;
+}
+.hero-kicker-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  background: var(--crimson);
+  box-shadow: 0 0 12px rgba(139,26,47,0.5);
+  animation: dotPulse 2s ease-in-out infinite;
+}
+@keyframes dotPulse {
+  0%, 100% { box-shadow: 0 0 6px rgba(139,26,47,0.4); }
+  50%       { box-shadow: 0 0 16px rgba(139,26,47,0.8); }
+}
+.hero-kicker-text {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--crimson);
+}
+.hero-kicker-sep {
+  width: 1px; height: 12px;
+  background: var(--border);
+}
+.hero-kicker-institution {
+  font-size: 11px; font-weight: 500;
+  letter-spacing: 0.06em;
+  color: var(--text-muted);
+}
+
+/* THE WORDMARK — signature element */
+.hero-wordmark {
+  margin-bottom: 24px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.35s forwards;
+  position: relative;
+}
+.hero-cocai {
+  display: block;
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(72px, 16vw, 192px);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  color: var(--navy);
+  line-height: 0.9;
+}
+.hero-cocai-accent {
+  display: block;
+  font-family: 'DM Sans', 'Inter', sans-serif;
+  font-size: clamp(72px, 16vw, 192px);
+  font-weight: 200;
+  letter-spacing: -0.05em;
+  line-height: 0.9;
+  -webkit-text-stroke: 1.5px rgba(10,22,40,0.16);
+  color: transparent;
+}
+.hero-year-badge {
+  display: inline-flex; align-items: center; gap: 10px;
+  margin-top: 18px;
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(14px, 2.2vw, 19px);
+  font-weight: 400;
+  letter-spacing: 0.16em;
+  color: var(--text-light);
+}
+.hero-year-badge strong { color: var(--navy); font-weight: 600; }
+.hero-year-badge svg { width: 16px; height: 16px; stroke: var(--crimson); }
+
+.hero-tagline {
+  font-family: 'DM Sans', sans-serif;
+  font-size: clamp(16px, 1.8vw, 21px);
+  font-weight: 300;
+  font-style: italic;
+  color: var(--text-muted);
+  max-width: 520px;
+  line-height: 1.65;
+  margin-bottom: 44px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.5s forwards;
+  letter-spacing: 0.01em;
+}
+
+.hero-actions {
+  display: flex; gap: 12px; flex-wrap: wrap; align-items: center;
+  margin-bottom: 64px;
+  opacity: 0; animation: fadeUp 0.9s ease 0.65s forwards;
+}
+.btn-primary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: var(--navy); color: white;
+  font-size: 14px; font-weight: 600;
+  padding: 13px 26px; border-radius: 50px;
+  transition: transform 0.2s, box-shadow 0.2s, background 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn-primary:hover { transform: translateY(-2px); box-shadow: var(--shadow-lg); background: #16263F; }
+.btn-secondary {
+  display: inline-flex; align-items: center; gap: 8px;
+  background: transparent; color: var(--navy);
+  font-size: 14px; font-weight: 500;
+  padding: 13px 26px; border-radius: 50px;
+  border: 1px solid var(--border-hover);
+  transition: border-color 0.2s, background 0.2s, color 0.2s;
+  letter-spacing: 0.01em;
+}
+.btn-secondary:hover { border-color: var(--crimson); color: var(--crimson); background: #FDF0F2; }
+
+/* Stats row inside hero */
+.hero-stats {
+  display: flex; gap: 0;
+  opacity: 0; animation: fadeUp 0.9s ease 0.8s forwards;
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  flex-wrap: wrap;
+}
+.hero-stat {
+  flex: 1; min-width: 110px; padding-right: 32px;
+  border-right: 1px solid var(--border);
+  margin-right: 32px;
+  margin-bottom: 12px;
+}
+.hero-stat:last-child { border-right: none; margin-right: 0; }
+.hero-stat-num {
+  font-family: 'DM Sans', sans-serif;
+  font-size: 26px; font-weight: 600;
+  color: var(--navy);
+  letter-spacing: -0.03em; line-height: 1;
+  margin-bottom: 6px;
+}
+.hero-stat-label { font-size: 12px; color: var(--text-muted); line-height: 1.5; }
+
+/* scroll hint */
+.hero-scroll-hint {
+  position: absolute; bottom: 28px; left: 50%; transform: translateX(-50%);
+  display: flex; flex-direction: column; align-items: center; gap: 8px;
+  opacity: 0; animation: fadeIn 1s ease 1.5s forwards;
+  z-index: 2;
+}
+.hero-scroll-hint span {
+  font-size: 10px; letter-spacing: 0.14em; text-transform: uppercase;
+  color: var(--text-light);
+}
+.scroll-line {
+  width: 1px; height: 36px;
+  background: linear-gradient(to bottom, var(--text-light), transparent);
+  animation: scrollDrop 2s ease-in-out infinite;
+}
+@keyframes scrollDrop {
+  0%   { transform: scaleY(0); transform-origin: top; opacity: 0; }
+  50%  { transform: scaleY(1); transform-origin: top; opacity: 1; }
+  100% { transform: scaleY(1); transform-origin: bottom; opacity: 0; }
+}
+
+@keyframes fadeUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
+}
+
+/* ─── SECTION WRAPPER ──────────────────────────── */
+section { padding: 96px 32px; }
+.section-inner { max-width: 1160px; margin: 0 auto; }
+.section-eyebrow {
+  font-size: 11px; font-weight: 600; letter-spacing: 0.12em;
+  color: var(--crimson); text-transform: uppercase;
+  margin-bottom: 16px;
+  display: flex; align-items: center; gap: 8px;
+}
+.section-eyebrow::before {
+  content: ''; width: 20px; height: 2px;
+  background: var(--crimson); border-radius: 1px;
+}
+.section-title {
+  font-size: clamp(26px, 3.5vw, 42px);
+  font-weight: 700; color: var(--navy);
+  letter-spacing: -0.03em; margin-bottom: 16px;
+}
+.section-subtitle {
+  font-size: 16px; color: var(--text-muted);
+  max-width: 600px; line-height: 1.75;
+  margin-bottom: 56px;
+}
+
+/* ─── PHILOSOPHY BAND ──────────────────────────── */
+#philosophy { background: var(--navy); color: white; }
+.philosophy-inner {
+  max-width: 1160px; margin: 0 auto;
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px;
+  align-items: center;
+}
+.philosophy-quote {
+  font-size: clamp(20px, 2.5vw, 32px);
+  font-family: 'Playfair Display', Georgia, serif;
+  font-style: italic;
+  font-weight: 700;
+  line-height: 1.4;
+  color: white;
+}
+.philosophy-quote span { color: #FFD580; }
+.philosophy-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.philosophy-card {
+  background: rgba(255,255,255,0.07);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+.philosophy-card-icon {
+  width: 36px; height: 36px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 12px;
+  font-size: 18px;
+}
+.philosophy-card-title { font-size: 13px; font-weight: 600; color: white; margin-bottom: 4px; }
+.philosophy-card-desc { font-size: 12px; color: rgba(255,255,255,0.55); line-height: 1.6; }
+
+/* ─── AI HORIZONTAL BAND ───────────────────────── */
+#ai-horizontal { background: var(--slate); }
+.ai-band-header { margin-bottom: 40px; }
+.ai-band-visual {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-md);
+}
+.ai-band-top {
+  background: linear-gradient(135deg, var(--navy) 0%, #1a2f4e 100%);
+  padding: 20px 32px;
+  display: flex; align-items: center; gap: 12px;
+  flex-wrap: wrap;
+}
+.ai-band-badge {
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.18);
+  color: white;
+  font-size: 12px; font-weight: 600;
+  padding: 4px 12px; border-radius: 20px;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+.ai-band-label-text {
+  color: rgba(255,255,255,0.8); font-size: 14px;
+}
+.ai-band-label-text strong { color: white; }
+
+/* AI horizontal table -> stacked cards on mobile */
+.ai-table-head {
+  display: grid; grid-template-columns: 160px 1fr; border-bottom: 1px solid var(--border);
+}
+.ai-table-head-domain {
+  padding: 16px 0; font-size: 11px; font-weight: 600; color: var(--text-muted);
+  letter-spacing: .06em; text-transform: uppercase; border-right: 1px solid var(--border);
+  display: flex; align-items: center; padding-left: 32px;
+}
+.ai-table-head-phases { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.ai-table-head-phases > div { padding: 16px; font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; }
+.ai-row {
+  display: grid; grid-template-columns: 160px 1fr; border-bottom: 1px solid var(--border);
+}
+.ai-row:last-child { border-bottom: none; }
+.ai-row-label {
+  padding: 16px 12px 16px 32px; font-size: 13px; font-weight: 600; color: var(--navy);
+  border-right: 1px solid var(--border); display: flex; align-items: center; gap: 8px;
+}
+.ai-row-phases { display: grid; grid-template-columns: 1fr 1fr 1fr; }
+.ai-row-phases > div { padding: 16px; font-size: 12px; color: var(--text-muted); }
+.ai-dot { width: 8px; height: 8px; border-radius: 50%; flex-shrink: 0; }
+
+/* ─── PHASES / TIMELINE ────────────────────────── */
+#phases { background: white; }
+.phases-timeline {
+  position: relative;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+.phases-timeline::before {
+  content: '';
+  position: absolute; top: 40px; left: 16.67%; right: 16.67%;
+  height: 2px;
+  background: linear-gradient(90deg, var(--teal), var(--purple), var(--amber));
+  border-radius: 1px;
+  z-index: 0;
+}
+.phase-card {
+  position: relative; z-index: 1;
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  transition: box-shadow 0.3s, transform 0.3s;
+}
+.phase-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); }
+.phase-node {
+  width: 48px; height: 48px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 16px; font-weight: 700; color: white;
+  margin-bottom: 24px;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+.phase-node.p1 { background: var(--teal); }
+.phase-node.p2 { background: var(--purple); }
+.phase-node.p3 { background: var(--amber); }
+.phase-years {
+  font-size: 12px; font-weight: 600;
+  letter-spacing: 0.08em; margin-bottom: 8px;
+}
+.phase-card.p1 .phase-years { color: var(--teal); }
+.phase-card.p2 .phase-years { color: var(--purple); }
+.phase-card.p3 .phase-years { color: var(--amber); }
+.phase-name {
+  font-size: 22px; font-weight: 700; color: var(--navy);
+  margin-bottom: 12px; letter-spacing: -0.02em;
+}
+.phase-desc { font-size: 14px; color: var(--text-muted); line-height: 1.75; margin-bottom: 24px; }
+.phase-milestones { display: flex; flex-direction: column; gap: 8px; }
+.milestone {
+  display: flex; align-items: flex-start; gap: 10px;
+  font-size: 13px; color: var(--text-muted);
+}
+.milestone-dot {
+  width: 6px; height: 6px; border-radius: 50%;
+  flex-shrink: 0; margin-top: 7px;
+}
+.p1 .milestone-dot { background: var(--teal); }
+.p2 .milestone-dot { background: var(--purple); }
+.p3 .milestone-dot { background: var(--amber); }
+
+/* ─── DOMAIN VERTICALS ─────────────────────────── */
+#domains { background: var(--slate); }
+.domains-grid {
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  gap: 20px;
+}
+.domain-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  transition: box-shadow 0.3s, transform 0.3s, border-color 0.3s;
+  cursor: default;
+  position: relative; overflow: hidden;
+}
+.domain-card::before {
+  content: '';
+  position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  border-radius: 2px 2px 0 0;
+  transition: height 0.3s;
+}
+.domain-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-3px); border-color: transparent; }
+.domain-card:hover::before { height: 4px; }
+.domain-geo::before { background: var(--teal); }
+.domain-med::before { background: #C0392B; }
+.domain-quantum::before { background: var(--purple); }
+.domain-hcai::before { background: var(--amber); }
+.domain-edu::before { background: #2980B9; }
+.domain-llm::before { background: #16A085; }
+.domain-icon-wrap {
+  width: 48px; height: 48px;
+  border-radius: var(--radius-md);
+  display: flex; align-items: center; justify-content: center;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+.domain-geo .domain-icon-wrap { background: #E1F5EE; }
+.domain-med .domain-icon-wrap { background: #FDEDEC; }
+.domain-quantum .domain-icon-wrap { background: #EEEDFE; }
+.domain-hcai .domain-icon-wrap { background: #FEF9E7; }
+.domain-edu .domain-icon-wrap { background: #EAF4FB; }
+.domain-llm .domain-icon-wrap { background: #E8F8F5; }
+.domain-name { font-size: 16px; font-weight: 700; color: var(--navy); margin-bottom: 8px; letter-spacing: -0.01em; }
+.domain-desc { font-size: 13px; color: var(--text-muted); line-height: 1.7; margin-bottom: 20px; }
+.domain-tags { display: flex; flex-wrap: wrap; gap: 6px; }
+.dtag {
+  font-size: 11px; font-weight: 500;
+  padding: 3px 9px; border-radius: 20px;
+  background: var(--slate); color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+/* ─── RESEARCH × TEACHING TABLE ────────────────── */
+#pillars { background: white; }
+.pillars-table {
+  border: 1px solid var(--border);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--shadow-sm);
+}
+.pillars-header {
+  display: grid; grid-template-columns: 200px 1fr 1fr 1fr;
+  background: var(--navy);
+}
+.pillars-col-head {
+  padding: 16px 20px;
+  font-size: 12px; font-weight: 600;
+  color: rgba(255,255,255,0.7);
+  letter-spacing: 0.06em; text-transform: uppercase;
+}
+.pillars-col-head.main { color: white; font-size: 13px; }
+.pillars-row {
+  display: grid; grid-template-columns: 200px 1fr 1fr 1fr;
+  border-bottom: 1px solid var(--border);
+  transition: background 0.2s;
+}
+.pillars-row:last-child { border-bottom: none; }
+.pillars-row:hover { background: var(--slate); }
+.pillars-cell {
+  padding: 18px 20px;
+  font-size: 13px; color: var(--text-muted);
+  border-right: 1px solid var(--border);
+  line-height: 1.6;
+}
+.pillars-cell:last-child { border-right: none; }
+.pillars-cell.row-label {
+  font-weight: 600; color: var(--navy); font-size: 13px;
+  display: flex; align-items: center; gap: 8px;
+}
+.row-dot {
+  width: 8px; height: 8px; border-radius: 50%;
+  flex-shrink: 0;
+}
+
+/* Mobile pillar cards (hidden on desktop) */
+.pillars-cards { display: none; flex-direction: column; gap: 16px; }
+.pillar-card {
+  border: 1px solid var(--border); border-radius: var(--radius-lg);
+  padding: 20px; background: white;
+}
+.pillar-card-head {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 14px; font-weight: 700; color: var(--navy);
+  margin-bottom: 14px; padding-bottom: 12px;
+  border-bottom: 1px solid var(--border);
+}
+.pillar-card-row { margin-bottom: 12px; }
+.pillar-card-row:last-child { margin-bottom: 0; }
+.pillar-card-label {
+  font-size: 11px; font-weight: 600; letter-spacing: .06em; text-transform: uppercase;
+  color: var(--crimson); margin-bottom: 4px;
+}
+.pillar-card-text { font-size: 13px; color: var(--text-muted); line-height: 1.6; }
+
+/* ─── IMPACT TARGETS ───────────────────────────── */
+#targets { background: var(--slate); }
+.targets-grid {
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  gap: 20px; margin-bottom: 48px;
+}
+.target-card {
+  background: white;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  padding: 28px 24px;
+  text-align: center;
+  transition: box-shadow 0.3s;
+}
+.target-card:hover { box-shadow: var(--shadow-md); }
+.target-num {
+  font-size: 36px; font-weight: 700; color: var(--navy);
+  letter-spacing: -0.04em; line-height: 1;
+  margin-bottom: 8px;
+}
+.target-label { font-size: 13px; color: var(--text-muted); line-height: 1.5; }
+.target-accent { width: 24px; height: 3px; border-radius: 2px; margin: 12px auto 0; }
+.targets-grid-2 { display:grid; grid-template-columns:repeat(3,1fr); gap:20px; }
+
+/* ─── CREDITS ──────────────────────────────────── */
+#credits { background: white; }
+.credits-intro { font-size: 15px; color: var(--text-muted); max-width: 640px; line-height: 1.75; margin-bottom: 40px; }
+.credits-grid {
+  display: grid; grid-template-columns: repeat(2, 1fr);
+  gap: 16px;
+}
+.credit-item {
+  display: flex; gap: 16px; align-items: flex-start;
+  padding: 20px;
+  border: 1px solid var(--border);
+  border-radius: var(--radius-lg);
+  transition: border-color 0.2s;
+}
+.credit-item:hover { border-color: var(--border-hover); }
+.credit-logo {
+  width: 40px; height: 40px;
+  border-radius: var(--radius-sm);
+  display: flex; align-items: center; justify-content: center;
+  font-size: 13px; font-weight: 700; color: white;
+  flex-shrink: 0;
+  letter-spacing: -0.01em;
+}
+.credit-name { font-size: 13px; font-weight: 600; color: var(--navy); margin-bottom: 3px; }
+.credit-desc { font-size: 12px; color: var(--text-muted); line-height: 1.6; }
+.credit-aspect {
+  font-size: 11px; font-weight: 600;
+  color: var(--crimson);
+  background: #FDF0F2;
+  padding: 2px 8px; border-radius: 10px;
+  margin-top: 6px; display: inline-block;
+  letter-spacing: 0.04em;
+}
+
+/* ─── FOOTER ───────────────────────────────────── */
+footer {
+  background: var(--navy); color: white;
+  padding: 64px 32px 40px;
+}
+.footer-inner { max-width: 1160px; margin: 0 auto; }
+.footer-top {
+  display: grid; grid-template-columns: 1fr 1fr 1fr;
+  gap: 48px; margin-bottom: 48px;
+  padding-bottom: 40px;
+  border-bottom: 1px solid rgba(255,255,255,0.1);
+}
+.footer-brand-name {
+  font-size: 18px; font-weight: 700; margin-bottom: 4px;
+  letter-spacing: -0.02em;
+}
+.footer-brand-sub { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.6; }
+.footer-col-title {
+  font-size: 11px; font-weight: 600;
+  letter-spacing: 0.1em; text-transform: uppercase;
+  color: rgba(255,255,255,0.5); margin-bottom: 16px;
+}
+.footer-col-links { display: flex; flex-direction: column; gap: 8px; }
+.footer-col-links a {
+  font-size: 13px; color: rgba(255,255,255,0.7);
+  transition: color 0.2s;
+}
+.footer-col-links a:hover { color: white; }
+.footer-bottom {
+  display: flex; justify-content: space-between; align-items: center;
+  font-size: 12px; color: rgba(255,255,255,0.4);
+  flex-wrap: wrap; gap: 8px;
+}
+
+/* ─── SCROLL ANIMATIONS ────────────────────────── */
+.reveal {
+  opacity: 0; transform: translateY(24px);
+  transition: opacity 0.7s ease, transform 0.7s ease;
+}
+.reveal.visible { opacity: 1; transform: translateY(0); }
+.reveal-delay-1 { transition-delay: 0.1s; }
+.reveal-delay-2 { transition-delay: 0.2s; }
+.reveal-delay-3 { transition-delay: 0.3s; }
+.reveal-delay-4 { transition-delay: 0.4s; }
+.reveal-delay-5 { transition-delay: 0.5s; }
+
+/* ─── RESPONSIVE ───────────────────────────────── */
+@media (max-width: 960px) {
+  .philosophy-inner { grid-template-columns: 1fr; gap: 40px; }
+  .domains-grid { grid-template-columns: repeat(2, 1fr); }
+  .targets-grid { grid-template-columns: repeat(2, 1fr); }
+  .targets-grid-2 { grid-template-columns: repeat(2,1fr); }
+  .phases-timeline { grid-template-columns: 1fr; gap: 24px; }
+  .phases-timeline::before { display: none; }
+  .pillars-table { display: none; }
+  .pillars-cards { display: flex; }
+}
+
+@media (max-width: 680px) {
+  section { padding: 56px 20px; }
+
+  /* Nav */
+  .nav-inner { padding: 0 16px; height: 60px; }
+  .nav-links { display: none; }
+  .nav-cta { display: none; }
+  .nav-toggle { display: flex; }
+  .nav-logo-sub { display: none; }
+
+  /* Hero */
+  #hero-wrapper { min-height: 100dvh; }
+  #hero { padding: 88px 20px 64px; }
+  .hero-kicker { margin-bottom: 24px; flex-wrap: wrap; }
+  .hero-kicker-institution { display: none; }
+  .hero-kicker-sep { display: none; }
+  .hero-wordmark { margin-bottom: 18px; }
+  .hero-year-badge { margin-top: 14px; }
+  .hero-tagline { margin-bottom: 32px; }
+  .hero-actions { margin-bottom: 44px; gap: 10px; }
+  .btn-primary, .btn-secondary { padding: 12px 22px; font-size: 13px; width: 100%; justify-content: center; }
+  .hero-actions { flex-direction: column; align-items: stretch; }
+  .hero-stats { gap: 0; padding-top: 24px; }
+  .hero-stat { flex: 0 0 calc(50% - 14px); min-width: 0; padding-right: 0; border-right: none; margin-right: 0; }
+  .hero-stat:nth-child(odd) { margin-right: 28px; }
+  .hero-stat-num { font-size: 22px; }
+  .hero-scroll-hint { display: none; }
+
+  /* Sections general */
+  .section-title { font-size: 26px; }
+  .section-subtitle { margin-bottom: 36px; font-size: 14px; }
+  .section-eyebrow { margin-bottom: 12px; }
+
+  /* Philosophy */
+  .philosophy-quote { font-size: 19px; }
+  .philosophy-grid { grid-template-columns: 1fr; gap: 12px; }
+
+  /* AI horizontal */
+  .ai-band-top { padding: 16px 18px; }
+  .ai-table-head { display: none; }
+  .ai-row { grid-template-columns: 1fr; }
+  .ai-row-label { border-right: none; border-bottom: 1px solid var(--border); padding: 14px 18px; background: var(--slate); }
+  .ai-row-phases { grid-template-columns: 1fr; }
+  .ai-row-phases > div { padding: 12px 18px; border-bottom: 1px solid var(--border); }
+  .ai-row-phases > div:last-child { border-bottom: none; }
+  .ai-row-phases > div::before {
+    content: attr(data-phase);
+    display: block; font-size: 10px; font-weight: 700; letter-spacing: .08em; text-transform: uppercase;
+    margin-bottom: 4px;
+  }
+
+  /* Domains */
+  .domains-grid { grid-template-columns: 1fr; gap: 14px; }
+  .domain-card { padding: 22px; }
+
+  /* Targets */
+  .targets-grid { grid-template-columns: 1fr 1fr; gap: 12px; margin-bottom: 14px; }
+  .targets-grid-2 { grid-template-columns: 1fr 1fr; gap: 12px; }
+  .target-card { padding: 20px 14px; }
+  .target-num { font-size: 26px; }
+  .target-label { font-size: 12px; }
+
+  /* Credits */
+  .credits-grid { grid-template-columns: 1fr; gap: 12px; }
+  .credit-item { padding: 16px; }
+
+  /* Footer */
+  .footer-top { grid-template-columns: 1fr; gap: 28px; padding-bottom: 28px; margin-bottom: 28px; }
+  .footer-bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
+}
+
+@media (max-width: 380px) {
+  .hero-stat { flex: 0 0 100%; margin-right: 0 !important; padding-bottom: 14px; border-bottom: 1px solid var(--border); }
+  .hero-stat:last-child { border-bottom: none; padding-bottom: 0; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .reveal { opacity: 1; transform: none; transition: none; }
+  * { animation: none !important; transition-duration: 0.01ms !important; }
+}
+</style>
+</head>
+<body>
+
+<!-- ─── NAV ─────────────────────────────────────── -->
+<nav id="nav">
+  <div class="nav-inner">
+    <div class="nav-logo">
+      <div class="nav-logo-mark">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="white" stroke-width="1.5" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div>
+        <div class="nav-logo-text">KKU-COCAI2040</div>
+        <div class="nav-logo-sub">College of Computing, KKU</div>
+      </div>
+    </div>
+    <div class="nav-links">
+      <a href="#vision">Vision</a>
+      <a href="#phases">Phases</a>
+      <a href="#domains">Domains</a>
+      <a href="#pillars">Strategy</a>
+      <a href="#targets">Targets</a>
+      <a href="#credits">References</a>
+    </div>
+    <a href="#phases" class="nav-cta">Explore Roadmap</a>
+    <div class="nav-toggle" id="navToggle" aria-label="Toggle menu">
+      <svg class="icon-menu" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      <svg class="icon-close" viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><line x1="6" y1="6" x2="18" y2="18"/><line x1="6" y1="18" x2="18" y2="6"/></svg>
+    </div>
+  </div>
+  <div class="nav-mobile-panel" id="navMobilePanel">
+    <a href="#vision">Vision</a>
+    <a href="#phases">Phases</a>
+    <a href="#domains">Domains</a>
+    <a href="#pillars">Strategy</a>
+    <a href="#targets">Targets</a>
+    <a href="#credits">References</a>
+  </div>
+</nav>
+
+<!-- ─── HERO ─────────────────────────────────────── -->
+<div id="hero-wrapper">
+  <!-- Ambient grid -->
+  <div class="hero-grid" aria-hidden="true"></div>
+
+  <!-- Content -->
+  <div id="hero">
+    <!-- Kicker line -->
+    <div class="hero-kicker">
+      <div class="hero-kicker-dot"></div>
+      <span class="hero-kicker-text">Strategic Roadmap 2026–2040</span>
+      <div class="hero-kicker-sep"></div>
+      <span class="hero-kicker-institution">College of Computing · Khon Kaen University</span>
+    </div>
+
+    <!-- The wordmark -->
+    <div class="hero-wordmark" aria-label="COCAI 2040">
+      <span class="hero-cocai">KKU-COCAI</span>
+      <span class="hero-cocai-accent">2040</span>
+      <span class="hero-year-badge">
+        <strong>2026</strong>
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+        <strong>2040</strong>
+      </span>
+    </div>
+
+    <!-- Single quiet tagline -->
+    <p class="hero-tagline">
+      AI as a horizontal capability —<br>
+      built by the College of Computing,<br>
+      for every domain, every discipline.
+    </p>
+
+    <!-- CTAs -->
+    <div class="hero-actions">
+      <a href="#phases" class="btn-primary">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="13 17 18 12 13 7"/><polyline points="6 17 11 12 6 7"/></svg>
+        Explore the Roadmap
+      </a>
+      <a href="#domains" class="btn-secondary">
+        6 Research Domains
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </a>
+    </div>
+
+    <!-- Stats strip -->
+    <div class="hero-stats">
+      <div class="hero-stat">
+        <div class="hero-stat-num">15</div>
+        <div class="hero-stat-label">Years of vision</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">3</div>
+        <div class="hero-stat-label">Strategic phases</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">6</div>
+        <div class="hero-stat-label">Research domains</div>
+      </div>
+      <div class="hero-stat">
+        <div class="hero-stat-num">Top 3</div>
+        <div class="hero-stat-label">ASEAN AI institution by 2040</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scroll hint -->
+  <div class="hero-scroll-hint" aria-hidden="true">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</div>
+
+<!-- ─── PHILOSOPHY ──────────────────────────────── -->
+<section id="vision" style="background: var(--navy); padding: 96px 32px;">
+  <div class="philosophy-inner">
+    <div class="reveal">
+      <div style="font-size:11px;font-weight:600;letter-spacing:.12em;color:rgba(255,255,255,0.4);text-transform:uppercase;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+        <span style="width:20px;height:2px;background:rgba(255,255,255,0.3);border-radius:1px;display:inline-block;"></span>
+        Core Philosophy
+      </div>
+      <div class="philosophy-quote display">
+        "AI is not a department.<br>
+        It is a <span>horizontal capability</span><br>
+        that empowers every domain,<br>
+        every discipline, every human."
+      </div>
+      <div style="margin-top:32px;padding-top:32px;border-top:1px solid rgba(255,255,255,0.1);">
+        <div style="font-size:13px;color:rgba(255,255,255,0.5);line-height:1.7;">
+          Inspired by the Stanford HAI 3-Pillar Framework, MIT CSAIL research priorities,
+          and the Google DeepMind vision for AI in 2030 — adapted for the unique context
+          of Khon Kaen University and Northeast Thailand.
+        </div>
+      </div>
+    </div>
+    <div class="philosophy-grid reveal reveal-delay-2">
+      <div class="philosophy-card">
+        <div class="philosophy-card-icon" style="background:rgba(14,124,110,0.25);">🌐</div>
+        <div class="philosophy-card-title">Research Excellence</div>
+        <div class="philosophy-card-desc">World-class publications, citations, and patents in AI and interdisciplinary domains</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-card-icon" style="background:rgba(139,26,47,0.3);">🎓</div>
+        <div class="philosophy-card-title">Education Transformation</div>
+        <div class="philosophy-card-desc">From AI literacy for all students to deep specializations for the next generation</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-card-icon" style="background:rgba(201,123,26,0.25);">🏛️</div>
+        <div class="philosophy-card-title">Social Impact</div>
+        <div class="philosophy-card-desc">AI solutions for real problems: health, agriculture, disaster, and education in the region</div>
+      </div>
+      <div class="philosophy-card">
+        <div class="philosophy-card-icon" style="background:rgba(92,61,153,0.25);">🤝</div>
+        <div class="philosophy-card-title">Open &amp; Inclusive</div>
+        <div class="philosophy-card-desc">Open science, equitable access, ASEAN collaboration, and ethical AI by design</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── AI HORIZONTAL ───────────────────────────── -->
+<section id="ai-horizontal" style="background: var(--slate); padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="ai-band-header">
+      <div class="section-eyebrow">Architectural Principle</div>
+      <h2 class="section-title">AI as the Horizontal Layer</h2>
+      <p class="section-subtitle">
+        Rather than siloing AI as one department, COCAI embeds AI capabilities
+        across every domain — teaching, research, and societal impact — as a
+        shared foundational infrastructure.
+      </p>
+    </div>
+    <div class="ai-band-visual reveal">
+      <div class="ai-band-top">
+        <div class="ai-band-badge">HORIZONTAL CAPABILITY</div>
+        <div class="ai-band-label-text">
+          <strong>AI Core</strong> — Foundation Models · Responsible AI · Human-Centered AI · Agentic Systems · Data Infrastructure
+        </div>
+      </div>
+
+      <div class="ai-table-head">
+        <div class="ai-table-head-domain">Domain</div>
+        <div class="ai-table-head-phases">
+          <div style="color:var(--teal);">Foundation (2026–30)</div>
+          <div style="color:var(--purple);">Expansion (2030–35)</div>
+          <div style="color:var(--amber);">Leadership (2035–40)</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-row-label"><span class="ai-dot" style="background:var(--teal);"></span>GeoAI</div>
+        <div class="ai-row-phases">
+          <div data-phase="Foundation" style="border-left:3px solid var(--teal);">Spatial data lab, remote sensing course</div>
+          <div data-phase="Expansion" style="border-left:3px solid var(--purple);">GeoAI research center, climate models</div>
+          <div data-phase="Leadership" style="border-left:3px solid var(--amber);">Regional env. intelligence hub</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-row-label"><span class="ai-dot" style="background:#C0392B;"></span>AI + Medicine</div>
+        <div class="ai-row-phases">
+          <div data-phase="Foundation" style="border-left:3px solid var(--teal);">Medical imaging AI, KKU Hospital pilots</div>
+          <div data-phase="Expansion" style="border-left:3px solid var(--purple);">Clinical AI center, drug discovery</div>
+          <div data-phase="Leadership" style="border-left:3px solid var(--amber);">ASEAN health AI reference center</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-row-label"><span class="ai-dot" style="background:var(--purple);"></span>Quantum Computing</div>
+        <div class="ai-row-phases">
+          <div data-phase="Foundation" style="border-left:3px solid var(--teal);">Quantum algorithms curriculum, simulation</div>
+          <div data-phase="Expansion" style="border-left:3px solid var(--purple);">Quantum-classical hybrid research</div>
+          <div data-phase="Leadership" style="border-left:3px solid var(--amber);">Quantum sensing &amp; cryptography lab</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-row-label"><span class="ai-dot" style="background:var(--amber);"></span>Human-Centered AI</div>
+        <div class="ai-row-phases">
+          <div data-phase="Foundation" style="border-left:3px solid var(--teal);">XAI &amp; ethics courses, Thai-context AI</div>
+          <div data-phase="Expansion" style="border-left:3px solid var(--purple);">ASEAN ethics framework, policy lab</div>
+          <div data-phase="Leadership" style="border-left:3px solid var(--amber);">Regional AI governance authority</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-row-label"><span class="ai-dot" style="background:#2980B9;"></span>AI for Education</div>
+        <div class="ai-row-phases">
+          <div data-phase="Foundation" style="border-left:3px solid var(--teal);">AI literacy for all KKU students</div>
+          <div data-phase="Expansion" style="border-left:3px solid var(--purple);">Adaptive learning platform, smart campus</div>
+          <div data-phase="Leadership" style="border-left:3px solid var(--amber);">National AI education model</div>
+        </div>
+      </div>
+
+      <div class="ai-row">
+        <div class="ai-row-label"><span class="ai-dot" style="background:#16A085;"></span>Agentic AI &amp; LLM</div>
+        <div class="ai-row-phases">
+          <div data-phase="Foundation" style="border-left:3px solid var(--teal);">Thai-language LLM research, agents</div>
+          <div data-phase="Expansion" style="border-left:3px solid var(--purple);">Multi-agent systems, robotics lab</div>
+          <div data-phase="Leadership" style="border-left:3px solid var(--amber);">ASEAN foundation model initiative</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PHASES ───────────────────────────────────── -->
+<section id="phases" style="background: white; padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="section-eyebrow">15-Year Timeline</div>
+    <h2 class="section-title">Three Strategic Phases</h2>
+    <p class="section-subtitle">
+      Each phase builds on the last — from establishing a strong foundation, to scaling
+      interdisciplinary research, to becoming a globally recognized AI leadership hub.
+    </p>
+    <div class="phases-timeline">
+
+      <div class="phase-card p1 reveal">
+        <div class="phase-node p1">I</div>
+        <div class="phase-years">2026 – 2030</div>
+        <div class="phase-name">Foundation</div>
+        <div class="phase-desc">
+          Build the infrastructure, talent, and culture needed for sustainable AI research
+          and education. Establish the core identity of COCAI.
+        </div>
+        <div class="phase-milestones">
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Launch AI literacy curriculum for all KKU undergraduates</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Establish 3 seed research labs (GeoAI, MedAI, HCAI)</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Hire 15+ AI-specialized faculty across domains</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>First KKU–Hospital AI pilot programs live</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Quantum computing curriculum and simulation lab</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card p2 reveal reveal-delay-2">
+        <div class="phase-node p2">II</div>
+        <div class="phase-years">2030 – 2035</div>
+        <div class="phase-name">Expansion</div>
+        <div class="phase-desc">
+          Scale research centers, deepen industry and hospital partnerships,
+          and launch flagship interdisciplinary degree programs with international reach.
+        </div>
+        <div class="phase-milestones">
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Open 6 domain-specific research centers</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Launch MSc and PhD in AI + Domain (GeoAI, MedAI, Quantum)</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>ASEAN AI Ethics Framework published and adopted</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>50+ industry and government partnerships active</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Thai-language foundation model released open source</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="phase-card p3 reveal reveal-delay-4">
+        <div class="phase-node p3">III</div>
+        <div class="phase-years">2035 – 2040</div>
+        <div class="phase-name">Leadership</div>
+        <div class="phase-desc">
+          Achieve recognition as Southeast Asia's premier AI research and education
+          hub, with deep policy influence, global publications, and impactful spin-offs.
+        </div>
+        <div class="phase-milestones">
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Top 3 AI research institution ranking in ASEAN</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>10+ deep-tech spin-offs from COCAI research</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>500+ AI researchers and alumni in the ecosystem</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Annual ASEAN AI Summit hosted at KKU</span>
+          </div>
+          <div class="milestone">
+            <div class="milestone-dot"></div>
+            <span>Quantum computing center with national designation</span>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── DOMAINS ──────────────────────────────────── -->
+<section id="domains" style="background: var(--slate); padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="section-eyebrow">Domain Verticals</div>
+    <h2 class="section-title">Six Research &amp; Teaching Domains</h2>
+    <p class="section-subtitle">
+      Each domain is a vertical specialty where AI capabilities are applied deeply —
+      producing unique research, programs, and social impact aligned with KKU's strengths.
+    </p>
+    <div class="domains-grid">
+
+      <div class="domain-card domain-geo reveal">
+        <div class="domain-icon-wrap">🌍</div>
+        <div class="domain-name">GeoAI &amp; Geoscience</div>
+        <div class="domain-desc">
+          AI for geospatial analysis, satellite remote sensing, climate modeling,
+          and environmental intelligence — uniquely positioned given KKU's location
+          in the agricultural heart of Northeast Thailand.
+        </div>
+        <div class="domain-tags">
+          <span class="dtag">Remote sensing</span>
+          <span class="dtag">Climate AI</span>
+          <span class="dtag">Spatial ML</span>
+          <span class="dtag">Smart agriculture</span>
+          <span class="dtag">Disaster response</span>
+        </div>
+      </div>
+
+      <div class="domain-card domain-med reveal reveal-delay-1">
+        <div class="domain-icon-wrap">🩺</div>
+        <div class="domain-name">AI + Medicine &amp; Health</div>
+        <div class="domain-desc">
+          Medical imaging AI, clinical decision support, drug discovery pipelines,
+          and AI-powered public health systems — in direct partnership with KKU's
+          world-class medical faculty and hospital.
+        </div>
+        <div class="domain-tags">
+          <span class="dtag">Medical imaging</span>
+          <span class="dtag">Drug discovery</span>
+          <span class="dtag">Clinical AI</span>
+          <span class="dtag">Public health</span>
+          <span class="dtag">Genomics</span>
+        </div>
+      </div>
+
+      <div class="domain-card domain-quantum reveal reveal-delay-2">
+        <div class="domain-icon-wrap">⚛️</div>
+        <div class="domain-name">Quantum Computing</div>
+        <div class="domain-desc">
+          Quantum algorithms, quantum-classical hybrid AI systems, post-quantum
+          cryptography, and quantum sensing — building a competitive advantage
+          in an emerging field with transformative long-term potential.
+        </div>
+        <div class="domain-tags">
+          <span class="dtag">Quantum ML</span>
+          <span class="dtag">Hybrid systems</span>
+          <span class="dtag">Post-quantum crypto</span>
+          <span class="dtag">Quantum sensing</span>
+        </div>
+      </div>
+
+      <div class="domain-card domain-hcai reveal reveal-delay-3">
+        <div class="domain-icon-wrap">🧑‍💻</div>
+        <div class="domain-name">Human-Centered AI</div>
+        <div class="domain-desc">
+          Explainable AI, fairness, AI ethics and governance, human-computer interaction,
+          and culturally-aware AI systems for Thai and ASEAN communities — ensuring AI
+          that serves people, not the other way around.
+        </div>
+        <div class="domain-tags">
+          <span class="dtag">Explainable AI</span>
+          <span class="dtag">AI Ethics</span>
+          <span class="dtag">ASEAN AI</span>
+          <span class="dtag">Accessibility</span>
+          <span class="dtag">HCI</span>
+        </div>
+      </div>
+
+      <div class="domain-card domain-edu reveal reveal-delay-4">
+        <div class="domain-icon-wrap">📚</div>
+        <div class="domain-name">AI for Education &amp; Society</div>
+        <div class="domain-desc">
+          Intelligent tutoring systems, adaptive learning platforms, AI literacy
+          programs, and smart city solutions — transforming Khon Kaen into a
+          model for AI-empowered communities in developing regions.
+        </div>
+        <div class="domain-tags">
+          <span class="dtag">Intelligent tutoring</span>
+          <span class="dtag">Adaptive learning</span>
+          <span class="dtag">Smart city</span>
+          <span class="dtag">Digital equity</span>
+        </div>
+      </div>
+
+      <div class="domain-card domain-llm reveal reveal-delay-5">
+        <div class="domain-icon-wrap">🤖</div>
+        <div class="domain-name">Agentic AI &amp; Foundation Models</div>
+        <div class="domain-desc">
+          Large language models for Thai and Southeast Asian languages, multi-agent
+          systems, autonomous robotics, and AI safety research — building the
+          core AI capabilities that power all other domains.
+        </div>
+        <div class="domain-tags">
+          <span class="dtag">Thai/ASEAN LLMs</span>
+          <span class="dtag">Multi-agent</span>
+          <span class="dtag">Robotics</span>
+          <span class="dtag">AI safety</span>
+          <span class="dtag">Reasoning</span>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- ─── PILLARS TABLE ────────────────────────────── -->
+<section id="pillars" style="background: white; padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="section-eyebrow">Strategic Pillars</div>
+    <h2 class="section-title">Teaching · Research · Impact</h2>
+    <p class="section-subtitle">
+      Adapted from the Stanford HAI 3-Pillar Framework — every domain engages
+      all three pillars across all three phases of the roadmap.
+    </p>
+
+    <!-- Desktop table -->
+    <div class="pillars-table reveal">
+      <div class="pillars-header">
+        <div class="pillars-col-head main">Domain</div>
+        <div class="pillars-col-head">🎓 Teaching</div>
+        <div class="pillars-col-head">🔬 Research</div>
+        <div class="pillars-col-head">🌍 Impact</div>
+      </div>
+      <div class="pillars-row">
+        <div class="pillars-cell row-label">
+          <span class="row-dot" style="background:var(--teal)"></span>GeoAI
+        </div>
+        <div class="pillars-cell">Geospatial analysis, remote sensing, environmental data science</div>
+        <div class="pillars-cell">Climate modeling, satellite AI, spatial prediction</div>
+        <div class="pillars-cell">Agricultural intelligence, flood prediction for Isan</div>
+      </div>
+      <div class="pillars-row">
+        <div class="pillars-cell row-label">
+          <span class="row-dot" style="background:#C0392B"></span>AI + Medicine
+        </div>
+        <div class="pillars-cell">Medical AI, healthcare data, clinical informatics</div>
+        <div class="pillars-cell">Diagnostic imaging AI, drug discovery, genomics</div>
+        <div class="pillars-cell">Rural healthcare AI, public health surveillance</div>
+      </div>
+      <div class="pillars-row">
+        <div class="pillars-cell row-label">
+          <span class="row-dot" style="background:var(--purple)"></span>Quantum
+        </div>
+        <div class="pillars-cell">Quantum algorithms, quantum programming, hybrid AI</div>
+        <div class="pillars-cell">Quantum ML, post-quantum cryptography</div>
+        <div class="pillars-cell">National security, secure communications</div>
+      </div>
+      <div class="pillars-row">
+        <div class="pillars-cell row-label">
+          <span class="row-dot" style="background:var(--amber)"></span>Human-Centered AI
+        </div>
+        <div class="pillars-cell">AI ethics, explainability, responsible AI design</div>
+        <div class="pillars-cell">Fairness, bias, HCI, culturally-aware systems</div>
+        <div class="pillars-cell">ASEAN ethics policy, governance frameworks</div>
+      </div>
+      <div class="pillars-row">
+        <div class="pillars-cell row-label">
+          <span class="row-dot" style="background:#2980B9"></span>AI for Education
+        </div>
+        <div class="pillars-cell">AI literacy, pedagogy, instructional design with AI</div>
+        <div class="pillars-cell">Adaptive learning, ITS, learning analytics</div>
+        <div class="pillars-cell">Smart campus, regional school AI pilots</div>
+      </div>
+      <div class="pillars-row">
+        <div class="pillars-cell row-label">
+          <span class="row-dot" style="background:#16A085"></span>Agentic AI
+        </div>
+        <div class="pillars-cell">LLMs, agents, robotics, AI systems engineering</div>
+        <div class="pillars-cell">Thai/ASEAN language models, multi-agent systems</div>
+        <div class="pillars-cell">Open-source ASEAN LLM, public AI tools</div>
+      </div>
+    </div>
+
+    <!-- Mobile stacked cards -->
+    <div class="pillars-cards reveal">
+      <div class="pillar-card">
+        <div class="pillar-card-head"><span class="row-dot" style="background:var(--teal)"></span>GeoAI</div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🎓 Teaching</div><div class="pillar-card-text">Geospatial analysis, remote sensing, environmental data science</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🔬 Research</div><div class="pillar-card-text">Climate modeling, satellite AI, spatial prediction</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🌍 Impact</div><div class="pillar-card-text">Agricultural intelligence, flood prediction for Isan</div></div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-head"><span class="row-dot" style="background:#C0392B"></span>AI + Medicine</div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🎓 Teaching</div><div class="pillar-card-text">Medical AI, healthcare data, clinical informatics</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🔬 Research</div><div class="pillar-card-text">Diagnostic imaging AI, drug discovery, genomics</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🌍 Impact</div><div class="pillar-card-text">Rural healthcare AI, public health surveillance</div></div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-head"><span class="row-dot" style="background:var(--purple)"></span>Quantum</div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🎓 Teaching</div><div class="pillar-card-text">Quantum algorithms, quantum programming, hybrid AI</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🔬 Research</div><div class="pillar-card-text">Quantum ML, post-quantum cryptography</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🌍 Impact</div><div class="pillar-card-text">National security, secure communications</div></div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-head"><span class="row-dot" style="background:var(--amber)"></span>Human-Centered AI</div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🎓 Teaching</div><div class="pillar-card-text">AI ethics, explainability, responsible AI design</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🔬 Research</div><div class="pillar-card-text">Fairness, bias, HCI, culturally-aware systems</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🌍 Impact</div><div class="pillar-card-text">ASEAN ethics policy, governance frameworks</div></div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-head"><span class="row-dot" style="background:#2980B9"></span>AI for Education</div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🎓 Teaching</div><div class="pillar-card-text">AI literacy, pedagogy, instructional design with AI</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🔬 Research</div><div class="pillar-card-text">Adaptive learning, ITS, learning analytics</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🌍 Impact</div><div class="pillar-card-text">Smart campus, regional school AI pilots</div></div>
+      </div>
+      <div class="pillar-card">
+        <div class="pillar-card-head"><span class="row-dot" style="background:#16A085"></span>Agentic AI</div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🎓 Teaching</div><div class="pillar-card-text">LLMs, agents, robotics, AI systems engineering</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🔬 Research</div><div class="pillar-card-text">Thai/ASEAN language models, multi-agent systems</div></div>
+        <div class="pillar-card-row"><div class="pillar-card-label">🌍 Impact</div><div class="pillar-card-text">Open-source ASEAN LLM, public AI tools</div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── TARGETS ──────────────────────────────────── -->
+<section id="targets" style="background: var(--slate); padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="section-eyebrow">2040 Targets</div>
+    <h2 class="section-title">Measuring Success</h2>
+    <p class="section-subtitle">Clear, ambitious, and measurable targets that define what COCAI HORIZON 2040 means in practice.</p>
+    <div class="targets-grid">
+      <div class="target-card reveal">
+        <div class="target-num">Top 3</div>
+        <div class="target-label">AI research institution ranking in ASEAN</div>
+        <div class="target-accent" style="background:var(--teal)"></div>
+      </div>
+      <div class="target-card reveal reveal-delay-1">
+        <div class="target-num">500+</div>
+        <div class="target-label">AI researchers, graduates, and alumni active in the ecosystem</div>
+        <div class="target-accent" style="background:var(--crimson)"></div>
+      </div>
+      <div class="target-card reveal reveal-delay-2">
+        <div class="target-num">6</div>
+        <div class="target-label">World-class domain research centers fully operational</div>
+        <div class="target-accent" style="background:var(--purple)"></div>
+      </div>
+      <div class="target-card reveal reveal-delay-3">
+        <div class="target-num">50+</div>
+        <div class="target-label">Active industry, hospital, and government partnerships</div>
+        <div class="target-accent" style="background:var(--amber)"></div>
+      </div>
+    </div>
+    <div class="targets-grid-2 reveal">
+      <div class="target-card">
+        <div class="target-num">10+</div>
+        <div class="target-label">Deep-tech spin-offs launched from COCAI research</div>
+        <div class="target-accent" style="background:#16A085"></div>
+      </div>
+      <div class="target-card">
+        <div class="target-num">1</div>
+        <div class="target-label">Annual ASEAN AI Summit hosted at KKU, Khon Kaen</div>
+        <div class="target-accent" style="background:#2980B9"></div>
+      </div>
+      <div class="target-card">
+        <div class="target-num">Open</div>
+        <div class="target-label">ASEAN foundation language model released open source</div>
+        <div class="target-accent" style="background:var(--navy)"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── CREDITS ──────────────────────────────────── -->
+<section id="credits" style="background: white; padding: 96px 32px;">
+  <div class="section-inner">
+    <div class="section-eyebrow">References &amp; Credits</div>
+    <h2 class="section-title">Standing on Global Shoulders</h2>
+    <p class="credits-intro">
+      KKU COCAI2040 is informed by and gives full credit to the world's leading
+      AI research and education institutions. We have adapted their frameworks, priorities,
+      and philosophies to the unique context of Khon Kaen University and Northeast Thailand.
+    </p>
+    <div class="credits-grid reveal">
+      <div class="credit-item">
+        <div class="credit-logo" style="background:#8C1515;">S</div>
+        <div>
+          <div class="credit-name">Stanford HAI — Human-Centered AI Institute</div>
+          <div class="credit-desc">3-Pillar Framework: Research, Education, and Societal Impact. The organizing structure for COCAI's strategic pillars across all domains.</div>
+          <span class="credit-aspect">3-Pillar Framework</span>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-logo" style="background:#A31F34;">M</div>
+        <div>
+          <div class="credit-name">MIT CSAIL — Computer Science &amp; AI Lab</div>
+          <div class="credit-desc">Research priority areas including physics-guided deep learning, liquid networks, and robotics as outlined in the 2026 USG RFI submission.</div>
+          <span class="credit-aspect">Research Priorities</span>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-logo" style="background:#1A73E8;">G</div>
+        <div>
+          <div class="credit-name">Google DeepMind — "AI in 2030" Report</div>
+          <div class="credit-desc">Epoch AI study commissioned by Google DeepMind projecting AI capabilities, compute scaling, and scientific breakthroughs through 2030.</div>
+          <span class="credit-aspect">Long-term Vision</span>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-logo" style="background:#750014;">M</div>
+        <div>
+          <div class="credit-name">MIT CISR — 4-Stage AI Maturity Model</div>
+          <div class="credit-desc">Framework for measuring how institutions progress from AI piloting to full-scale deployment, used to structure COCAI's three phases.</div>
+          <span class="credit-aspect">Maturity Model</span>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-logo" style="background:#003057;">G</div>
+        <div>
+          <div class="credit-name">Georgia Tech — AI-Powered Learning</div>
+          <div class="credit-desc">Jill Watson intelligent tutoring research and the medium/long-term framework for AI in education (Ashok Goel et al., 2020).</div>
+          <span class="credit-aspect">AI for Education</span>
+        </div>
+      </div>
+      <div class="credit-item">
+        <div class="credit-logo" style="background:#00369F;">N</div>
+        <div>
+          <div class="credit-name">NAIRR — National AI Research Resource</div>
+          <div class="credit-desc">Stanford HAI-championed initiative for equitable access to compute, datasets, and AI tools — a model for COCAI's open research infrastructure.</div>
+          <span class="credit-aspect">Open Infrastructure</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ─── FOOTER ───────────────────────────────────── -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-top">
+      <div>
+        <div style="display:flex;align-items:center;gap:10px;margin-bottom:16px;">
+          <div style="width:36px;height:36px;background:var(--crimson);border-radius:8px;display:flex;align-items:center;justify-content:center;">
+            <svg width="20" height="20" viewBox="0 0 24 24" fill="white"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5"/></svg>
+          </div>
+          <div>
+            <div class="footer-brand-name">KKU-COCAI2040</div>
+            <div class="footer-brand-sub">College of Computing &amp; AI · KKU</div>
+          </div>
+        </div>
+        <div class="footer-brand-sub" style="max-width:280px;line-height:1.7;">
+          Khon Kaen University, College of Computing and Artificial Intelligence.<br>
+          123 Mitraphap Road, Khon Kaen 40002, Thailand.
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">Roadmap</div>
+        <div class="footer-col-links">
+          <a href="#vision">Vision &amp; Philosophy</a>
+          <a href="#phases">Three Phases (2026–2040)</a>
+          <a href="#domains">Six Domain Verticals</a>
+          <a href="#pillars">Teaching · Research · Impact</a>
+          <a href="#targets">2040 Targets</a>
+        </div>
+      </div>
+      <div>
+        <div class="footer-col-title">References</div>
+        <div class="footer-col-links">
+          <a href="https://hai.stanford.edu" target="_blank" rel="noopener">Stanford HAI</a>
+          <a href="https://csail.mit.edu" target="_blank" rel="noopener">MIT CSAIL</a>
+          <a href="https://deepmind.google" target="_blank" rel="noopener">Google DeepMind</a>
+          <a href="https://cisr.mit.edu" target="_blank" rel="noopener">MIT CISR</a>
+          <a href="https://kku.ac.th" target="_blank" rel="noopener">Khon Kaen University</a>
+        </div>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div>© 2026 College of Computing &amp; AI, Khon Kaen University. KKU-COCAI2040 Strategic Roadmap.</div>
+      <div>Frameworks adapted with credit from Stanford HAI · MIT CSAIL · Google DeepMind · MIT CISR</div>
+    </div>
+  </div>
+</footer>
+
+<!-- ─── SCRIPTS ──────────────────────────────────── -->
+<script>
+// Nav scroll state
+const nav = document.getElementById('nav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 20);
+}, { passive: true });
+
+// Mobile menu toggle
+const navToggle = document.getElementById('navToggle');
+const navPanel = document.getElementById('navMobilePanel');
+navToggle.addEventListener('click', () => {
+  navToggle.classList.toggle('open');
+  navPanel.classList.toggle('open');
+});
+navPanel.querySelectorAll('a').forEach(a => {
+  a.addEventListener('click', () => {
+    navToggle.classList.remove('open');
+    navPanel.classList.remove('open');
+  });
+});
+
+// Reveal on scroll
+const reveals = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => {
+    if (e.isIntersecting) {
+      e.target.classList.add('visible');
+      observer.unobserve(e.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -40px 0px' });
+reveals.forEach(el => observer.observe(el));
+
+// Hero instant reveal
+document.querySelectorAll('#hero .reveal').forEach(el => {
+  el.classList.add('visible');
+});
+</script>
+</body>
+</html>
